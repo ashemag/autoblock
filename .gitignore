@@ -1,0 +1,5 @@
+notebooks/
+.ipynb*
+__pycache__
+8*
+chrome-data
