@@ -150,8 +150,8 @@ class Blocker:
         return False
 
     def _prompt_user_hateful_tweet(self):
-        print("A sample input here is https://twitter.com/mycorrhizon/status/1150879053353631744")
-        hateful_tweet_link = input("Enter in the hateful tweet link: ")
+        print("A sample input here is https://twitter.com/<username>/status/<status>")
+        hateful_tweet_link = input("Enter in the hateful tweet link: ").lower()
         if self._invalid_hateful_tweet(hateful_tweet_link):
             raise ValueError("Please pass in a valid tweet link.")
         return hateful_tweet_link
