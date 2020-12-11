@@ -27,25 +27,28 @@ class Blocker:
         folder = [item for item in os.listdir() if '8' in item][0]
 
         # set bot options
-        options = webdriver.ChromeOptions()
-        options.add_argument("--user-data-dir=chrome-data")
-        options.add_experimental_option("excludeSwitches", ["enable-automation"])
-        options.add_experimental_option('useAutomationExtension', False)
-        options.add_argument("start-maximized")
-        options.add_argument("--window-size=400,768")
+        try:
+            options = webdriver.ChromeOptions()
+            options.add_argument("--user-data-dir=chrome-data")
+            options.add_experimental_option("excludeSwitches", ["enable-automation"])
+            options.add_experimental_option('useAutomationExtension', False)
+            options.add_argument("start-maximized")
+            options.add_argument("--window-size=400,768")
 
-        driver = webdriver.Chrome(options=options, executable_path=f"{folder}/chromedriver")
-        driver.execute_script(
-            "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
-        )
-        driver.execute_cdp_cmd(
-            'Network.setUserAgentOverride',
-            {
-                "userAgent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.53 Safari/537.36'
-            },
-        )
-        print(driver.execute_script("return navigator.userAgent;"))
+            driver = webdriver.Chrome(options=options, executable_path=f"{folder}/chromedriver")
 
+            driver.execute_script(
+                "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
+            )
+            driver.execute_cdp_cmd(
+                'Network.setUserAgentOverride',
+                {
+                    "userAgent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.53 Safari/537.36'
+                },
+            )
+            print(driver.execute_script("return navigator.userAgent;"))
+        except:
+            raise ValueError("Quit all bot-opened chrome windows before continuing.")
         return driver
 
     def _twitter_login(self):
@@ -88,14 +91,13 @@ class Blocker:
         while no_change < 3:
             scroll_height += window
             self.driver.execute_script(f"window.scrollTo(0, {scroll_height})")
-            time.sleep(5)
+            time.sleep(2)
             el = self.driver.find_element_by_tag_name('body')
             prev_num = len(usernames)
             for item in el.text.split('Follow'):
                 if '@' in item:
                     username = '@' + item.split('@')[-1].split('\n')[0]
                     usernames.add(username)
-                    count += 1
 
             # check if user name is the same value as its prev. if yes increment no change marker
             if len(usernames) == prev_num:
