@@ -1,7 +1,7 @@
 # Twitter Autoblocker
 
-For automatically blocking hateful content on twitter.
-![](src/static/blocked.png)
+![](src/static/blocked.png)<br/>
+For automatically blocking hateful content on twitter.<br/>
 
 ### Set Up
 
