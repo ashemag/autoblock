@@ -54,7 +54,7 @@ class Blocker:
         if 'Home' in self.driver.title:
             print("Already logged in!")
         else:
-            username, password = self._prompt_user()
+            username, password = self._prompt_user_login()
 
             self.driver.find_element_by_xpath("//input[contains(@name,'username')]").send_keys(
                 username
@@ -76,7 +76,7 @@ class Blocker:
     def _fetch_users_to_block(self, path):
         if "likes" not in path:
             path = os.path.join(path, "likes")
-        
+
         self.driver.get(path)
         usernames = set()
         hateful_user = '@' + path.split('/')[3]

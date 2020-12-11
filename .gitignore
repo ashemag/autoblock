@@ -3,3 +3,4 @@ notebooks/
 __pycache__
 8*
 chrome-data
+.DS_Store

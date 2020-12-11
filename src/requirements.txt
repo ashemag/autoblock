@@ -1,4 +1,12 @@
 beautifulsoup4==4.8.2
+certifi==2020.12.5
+chardet==3.0.4
 chromedriver-autoinstaller==0.2.2
+fawkes==0.0.1
+idna==2.10
+nltk==3.5
 requests==2.23.0
 selenium==3.141.0
+soupsieve==2.1
+stdiomask==0.0.6
+urllib3==1.25.11
